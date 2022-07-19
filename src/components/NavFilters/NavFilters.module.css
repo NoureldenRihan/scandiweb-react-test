@@ -1,0 +1,22 @@
+.filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.active {
+  color: #1dcf65;
+  position: relative;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 2px;
+  background-color: #1dcf65;
+}
