@@ -6,3 +6,46 @@
 .actions div {
   display: inline-block;
 }
+
+.actions img {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.actions .currencyChanger {
+  margin-left: 10px;
+  position: relative;
+}
+
+.actions .currencyChanger .currencyOptions {
+  position: absolute;
+  top: 25px;
+  left: -25px;
+  background-color: white;
+  box-shadow: 1px 1px 10px rgb(198, 198, 198);
+  display: none;
+  width: fit-content;
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.actions .currencyChanger .currencyOptions ul {
+  list-style: none;
+  text-align: left;
+  overflow: hidden;
+}
+
+.actions .currencyChanger .currencyOptions ul li {
+  padding: 8px 35px 8px 10px;
+  transition: 0.3s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.actions .currencyChanger .currencyOptions ul li:hover {
+  background-color: #eeeeee;
+}
+
+.actions .cartIcon {
+  margin-left: 15px;
+}
