@@ -7,7 +7,6 @@ import { setCurrency } from "../redux/actions/actions";
 class NavActions extends Component {
   state = {
     currencies: [],
-    symbol: this.props.currencySymbol,
   };
 
   showCurrencyModel = () => {
@@ -44,7 +43,7 @@ class NavActions extends Component {
       <div className={style.actions}>
         <div className="currencyArea">
           <h3 id="currency" className="currency">
-            {this.state.symbol}
+            {this.props.currencySymbol}
           </h3>
         </div>
         <div className={style.currencyChanger}>
@@ -81,7 +80,11 @@ class NavActions extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const currencySymbol = state.centralState.currencySymbol;
+  const data = {
+    ...state.centralState,
+  };
+
+  const currencySymbol = data.currencySymbol;
 
   return { currencySymbol };
 };

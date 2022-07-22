@@ -7,13 +7,16 @@ let initialState = {
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_CURRENCY":
-      state.currencySymbol = action.payload.currencySymbol;
-      state.currencyLabel = action.payload.currencyLabel;
-      return state;
+      return {
+        ...state,
+        currencySymbol: action.payload.currencySymbol,
+        currencyLabel: action.payload.currencyLabel,
+      };
     case "SET_CATEGORY":
-      state.category = action.payload.category;
-      console.log(state);
-      return state;
+      return {
+        ...state,
+        category: action.payload.category,
+      };
     default:
       return state;
   }

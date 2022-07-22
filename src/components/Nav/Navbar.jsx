@@ -8,13 +8,11 @@ class Navbar extends Component {
   state = {};
   render() {
     return (
-      <div className="container">
-        <nav className={style.nav}>
-          <NavFilters />
-          <Logo />
-          <NavActions />
-        </nav>
-      </div>
+      <nav className={style.nav}>
+        <NavFilters />
+        <Logo />
+        <NavActions />
+      </nav>
     );
   }
 }

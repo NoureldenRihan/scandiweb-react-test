@@ -1,13 +1,14 @@
 .filters {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
 }
 
 .filter {
   cursor: pointer;
+  font-weight: 400;
 }
 
 .active {

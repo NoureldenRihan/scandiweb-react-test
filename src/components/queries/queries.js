@@ -36,3 +36,36 @@ export async function getCurrencies() {
     .then((res) => (files = res.data.currencies));
   return files;
 }
+
+export async function getProductsData() {
+  let files = {};
+  await fetch("http://localhost:4000", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+      query {
+        category(input: {
+          title: "all"
+        }){
+    	      products{
+              id
+              name
+              inStock
+              prices {
+                currency {
+                  symbol
+                }
+                amount
+                }
+              gallery
+              category
+      }
+  }
+    }`,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => (files = res.data.category));
+  return files;
+}
