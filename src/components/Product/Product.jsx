@@ -8,19 +8,34 @@ class Product extends Component {
   state = {};
 
   setCurrency = (currency) => {
+    let chosenCurrency = "";
     switch (currency) {
-      case "USD":
-        return {};
       case "GBP":
-        return {};
+        chosenCurrency = this.props.data.prices.filter(
+          (item) => item.currency.label === this.props.currency
+        );
+        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
       case "AUD":
-        return {};
+        chosenCurrency = this.props.data.prices.filter(
+          (item) => item.currency.label === this.props.currency
+        );
+        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
       case "JPY":
-        return {};
+        chosenCurrency = this.props.data.prices.filter(
+          (item) => item.currency.label === this.props.currency
+        );
+        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
       case "RUB":
-        return {};
+        chosenCurrency = this.props.data.prices.filter(
+          (item) => item.currency.label === this.props.currency
+        );
+        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
+      case "USD":
       default:
-        return {};
+        chosenCurrency = this.props.data.prices.filter(
+          (item) => item.currency.label === this.props.currency
+        );
+        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
     }
   };
 
@@ -33,11 +48,26 @@ class Product extends Component {
             src={this.props.data.gallery[0]}
             alt={this.props.data.name}
           />
-          <AddToCart />
-          <Heart />
+          {this.props.data.inStock ? (
+            <React.Fragment>
+              <AddToCart id={this.props.data.id} />
+              <Heart />
+            </React.Fragment>
+          ) : (
+            ""
+          )}
         </div>
         <h3 className={style.productName}>{this.props.data.name}</h3>
-        <h4 className={style.productPrice}>{this.props.data.id}</h4>
+        <h4 className={style.productPrice}>
+          {this.setCurrency(this.props.currency)}
+        </h4>
+        {!this.props.data.inStock ? (
+          <div className={style.disabled}>
+            <h2 className={style.disabledTitle}>Out Of Stock</h2>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

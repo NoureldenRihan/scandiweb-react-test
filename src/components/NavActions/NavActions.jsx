@@ -3,6 +3,7 @@ import style from "./NavActions.module.css";
 import { getCurrencies } from "../queries/queries";
 import { connect } from "react-redux";
 import { setCurrency } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 class NavActions extends Component {
   state = {
@@ -68,12 +69,14 @@ class NavActions extends Component {
             </ul>
           </div>
         </div>
-        <div className={style.cartIcon}>
-          <img
-            src={window.location.origin + "/Images & Icons/cart.png"}
-            alt="Cart Icon"
-          />
-        </div>
+        <Link to="/cart">
+          <div className={style.cartIcon}>
+            <img
+              src={window.location.origin + "/Images & Icons/cart.png"}
+              alt="Cart Icon"
+            />
+          </div>
+        </Link>
       </div>
     );
   }

@@ -54,7 +54,7 @@ export async function getProductsData() {
               inStock
               prices {
                 currency {
-                  symbol
+                  label
                 }
                 amount
                 }
@@ -67,5 +67,46 @@ export async function getProductsData() {
   })
     .then((res) => res.json())
     .then((res) => (files = res.data.category));
+  return files;
+}
+
+export async function getProduct(id) {
+  let files = {};
+  await fetch("http://localhost:4000", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+      query {
+        product(id: "${id}"){
+          		id
+              name
+              inStock
+              prices {
+                currency {
+                  label
+                }
+                amount
+              }
+              gallery
+              category
+    					description
+    					attributes {
+                id
+                name
+                type
+                items {
+                  id
+                  displayValue
+                  value
+                }
+              }
+    					brand
+        }
+    }`,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => (files = res.data));
   return files;
 }
