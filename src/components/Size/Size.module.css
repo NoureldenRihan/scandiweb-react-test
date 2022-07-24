@@ -1,0 +1,26 @@
+.sizeContainer {
+}
+
+.sizeHolder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sizeHolder h3 {
+  margin: 5px 10px 5px 0;
+  border: 2px solid black;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sizeHolder .size {
+  color: black;
+}
+
+.sizeHolder .size:hover,
+.selected {
+  color: white;
+  background-color: black;
+}

@@ -107,6 +107,6 @@ export async function getProduct(id) {
     }),
   })
     .then((res) => res.json())
-    .then((res) => (files = res.data));
+    .then((res) => (files = res.data.product));
   return files;
 }

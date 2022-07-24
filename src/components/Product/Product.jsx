@@ -10,27 +10,6 @@ class Product extends Component {
   setCurrency = (currency) => {
     let chosenCurrency = "";
     switch (currency) {
-      case "GBP":
-        chosenCurrency = this.props.data.prices.filter(
-          (item) => item.currency.label === this.props.currency
-        );
-        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
-      case "AUD":
-        chosenCurrency = this.props.data.prices.filter(
-          (item) => item.currency.label === this.props.currency
-        );
-        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
-      case "JPY":
-        chosenCurrency = this.props.data.prices.filter(
-          (item) => item.currency.label === this.props.currency
-        );
-        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
-      case "RUB":
-        chosenCurrency = this.props.data.prices.filter(
-          (item) => item.currency.label === this.props.currency
-        );
-        return `${this.props.currencySymbol}${chosenCurrency[0].amount}`;
-      case "USD":
       default:
         chosenCurrency = this.props.data.prices.filter(
           (item) => item.currency.label === this.props.currency
