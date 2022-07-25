@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Attribute from "../Attribute/Attribute";
 import SwatchAttribute from "../SwatchAttribute/SwatchAttribute";
 import { setCartItem } from "../redux/actions/actions";
+import { Navigate } from "react-router-dom";
 
 class ProductData extends Component {
   state = {
@@ -60,7 +61,6 @@ class ProductData extends Component {
   };
 
   addToCart = () => {
-    console.log("processing Gamma Rays");
     let product = {
       name: this.state.productData.name,
       brand: this.state.productData.brand,
@@ -120,6 +120,16 @@ class ProductData extends Component {
     document.getElementById("MainImg").src = src;
   };
 
+  checkStock = () => {
+    if (this.state.productData.inStock !== undefined) {
+      if (this.state.productData.inStock !== true) {
+        return <Navigate to="/" />;
+      } else {
+        return;
+      }
+    }
+  };
+
   render() {
     const data = this.state.productData;
     const description = `${data.description}`;
@@ -128,6 +138,7 @@ class ProductData extends Component {
 
     return (
       <div className={style.productArea}>
+        {this.checkStock()}
         <div className={style.imgs}>
           {data.gallery !== undefined
             ? data.gallery.map((item) => (
