@@ -16,3 +16,18 @@ export const setCategory = (category) => {
     },
   };
 };
+
+export const setCartItem = (data) => {
+  return {
+    type: "SET_CART_ITEM",
+    payload: {
+      data: data,
+    },
+  };
+};
+
+export const getCart = () => {
+  return {
+    type: "GET_CART",
+  };
+};

@@ -48,4 +48,20 @@
 
 .actions .cartIcon {
   margin-left: 15px;
+  position: relative;
+}
+
+.fullCart::before {
+  content: attr(data-quantity);
+  position: absolute;
+  background-color: black;
+  color: white;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 50%;
+  top: -12px;
+  right: -12px;
 }

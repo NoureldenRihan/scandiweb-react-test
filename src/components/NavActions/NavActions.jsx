@@ -70,12 +70,24 @@ class NavActions extends Component {
           </div>
         </div>
         <Link to="/cart">
-          <div className={style.cartIcon}>
-            <img
-              src={window.location.origin + "/Images & Icons/cart.png"}
-              alt="Cart Icon"
-            />
-          </div>
+          {this.props.quantity === 0 ? (
+            <div className={style.cartIcon} data-quantity={this.props.quantity}>
+              <img
+                src={window.location.origin + "/Images & Icons/cart.png"}
+                alt="Cart Icon"
+              />
+            </div>
+          ) : (
+            <div
+              className={`${style.cartIcon} ${style.fullCart}`}
+              data-quantity={this.props.quantity}
+            >
+              <img
+                src={window.location.origin + "/Images & Icons/cart.png"}
+                alt="Cart Icon"
+              />
+            </div>
+          )}
         </Link>
       </div>
     );
@@ -88,8 +100,9 @@ const mapStateToProps = (state) => {
   };
 
   const currencySymbol = data.currencySymbol;
+  const quantity = data.quantity;
 
-  return { currencySymbol };
+  return { currencySymbol, quantity };
 };
 
 const mapDispatchToProps = (dispatch) => {

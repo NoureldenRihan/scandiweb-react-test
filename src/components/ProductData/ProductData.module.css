@@ -51,3 +51,13 @@
 .cartAdd:hover {
   background-color: #48a761;
 }
+
+.proceedToCart {
+  display: none;
+  color: red;
+}
+
+.proceededToCart {
+  display: none;
+  color: rgb(0, 194, 0);
+}

@@ -2,6 +2,8 @@ let initialState = {
   category: "all",
   currencySymbol: "$",
   currencyLabel: "USD",
+  cart: [],
+  quantity: 0,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -17,6 +19,14 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         category: action.payload.category,
       };
+    case "SET_CART_ITEM":
+      return {
+        ...state,
+        cart: [...state.cart, action.payload.data],
+        quantity: state.quantity + 1,
+      };
+    case "GET_CART":
+      return state.cart;
     default:
       return state;
   }

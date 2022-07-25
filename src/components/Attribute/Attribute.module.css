@@ -1,13 +1,10 @@
-.sizeContainer {
-}
-
-.sizeHolder {
+.attributeHolder {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.sizeHolder h3 {
+.attributeHolder h3 {
   margin: 5px 10px 5px 0;
   border: 2px solid black;
   padding: 10px 12px;
@@ -15,11 +12,11 @@
   transition: 0.3s;
 }
 
-.sizeHolder .size {
+.attributeHolder .attribute {
   color: black;
 }
 
-.sizeHolder .size:hover,
+.attributeHolder .attribute:hover,
 .selected {
   color: white;
   background-color: black;

@@ -3,7 +3,9 @@ import { getProduct } from "../queries/queries";
 import style from "./ProductData.module.css";
 import parse from "html-react-parser";
 import { connect } from "react-redux";
-import Size from "../Size/Size";
+import Attribute from "../Attribute/Attribute";
+import SwatchAttribute from "../SwatchAttribute/SwatchAttribute";
+import { setCartItem } from "../redux/actions/actions";
 
 class ProductData extends Component {
   state = {
@@ -36,12 +38,81 @@ class ProductData extends Component {
     }
   };
 
-  attributesSetup = (product) => {
+  setCart = () => {
+    let totalAttributeNumbers = this.state.productData.attributes.length;
+    let currentAttributeNumbers = 0;
+    const productAttributes =
+      document.getElementsByClassName("selectedAttribute");
+    const productSwatchAttributes = document.getElementsByClassName(
+      "selectedSwatchAttribute"
+    );
+    Array.from(productAttributes).forEach(() => (currentAttributeNumbers += 1));
+    Array.from(productSwatchAttributes).forEach(
+      () => (currentAttributeNumbers += 1)
+    );
+
+    if (currentAttributeNumbers === totalAttributeNumbers) {
+      document.getElementById("proceedToCart").style.display = "none";
+      this.addToCart();
+    } else {
+      document.getElementById("proceedToCart").style.display = "block";
+    }
+  };
+
+  addToCart = () => {
+    console.log("processing Gamma Rays");
+    let product = {
+      name: this.state.productData.name,
+      brand: this.state.productData.brand,
+      prices: this.state.productData.prices,
+      gallery: this.state.productData.gallery,
+      attributes: [],
+      swatchAttributes: [],
+    };
+    const productAttributes =
+      document.getElementsByClassName("selectedAttribute");
+    const productSwatchAttributes = document.getElementsByClassName(
+      "selectedSwatchAttribute"
+    );
+    Array.from(productAttributes).forEach((item) => {
+      product.attributes.push({
+        name: item.dataset.name,
+        value: item.dataset.value,
+      });
+    });
+    Array.from(productSwatchAttributes).forEach((item) => {
+      product.swatchAttributes.push({
+        name: item.dataset.name,
+        value: item.dataset.value,
+      });
+    });
+
+    this.props.addToCart(product);
+  };
+
+  attributesSetup = (product, type) => {
     let data = "";
     if (product !== undefined) {
-      data = product.filter((item) => item.id === "Size");
+      if (type === "Text") {
+        data = product.filter((item) => item.type === "text");
+        return data.map((item) => (
+          <Attribute
+            key={Math.random()}
+            id={Math.floor(Math.random() * 100)}
+            data={item}
+          />
+        ));
+      } else if (type === "Swatch") {
+        data = product.filter((item) => item.type === "swatch");
+        return data.map((item) => (
+          <SwatchAttribute
+            key={Math.random()}
+            id={Math.floor(Math.random() * 100)}
+            data={item}
+          />
+        ));
+      }
     }
-    return <Size data={data[0]} />;
   };
 
   setImg = (e) => {
@@ -57,7 +128,6 @@ class ProductData extends Component {
 
     return (
       <div className={style.productArea}>
-        {console.log(this.state.productData)}
         <div className={style.imgs}>
           {data.gallery !== undefined
             ? data.gallery.map((item) => (
@@ -85,10 +155,15 @@ class ProductData extends Component {
         <div className={style.details}>
           <h2>{data.name}</h2>
           <h3>{data.brand}</h3>
-          {this.attributesSetup(productAttributes)}
-          <h3>Color</h3>
+          {this.attributesSetup(productAttributes, "Text")}
+          {this.attributesSetup(productAttributes, "Swatch")}
           <h3>{this.setCurrency(this.props.currency)}</h3>
-          <button className={style.cartAdd}>Add to Cart</button>
+          <p className={style.proceedToCart} id="proceedToCart">
+            Please Choose from the available options
+          </p>
+          <button className={style.cartAdd} onClick={this.setCart}>
+            Add to Cart
+          </button>
           {parsedDescription}
         </div>
       </div>
@@ -107,4 +182,10 @@ const mapStateToProps = (state) => {
   return { currency, currencySymbol };
 };
 
-export default connect(mapStateToProps)(ProductData);
+const mapdispatchToProps = (dispatch) => {
+  const addToCart = (product) => dispatch(setCartItem(product));
+
+  return { addToCart };
+};
+
+export default connect(mapStateToProps, mapdispatchToProps)(ProductData);
