@@ -62,3 +62,7 @@
   display: none;
   color: rgb(0, 194, 0);
 }
+
+.brand {
+  font-weight: 400;
+}

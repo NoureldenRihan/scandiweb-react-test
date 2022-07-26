@@ -110,3 +110,28 @@ export async function getProduct(id) {
     .then((res) => (files = res.data.product));
   return files;
 }
+
+export async function getAttributes(id) {
+  let files = {};
+  await fetch("http://localhost:4000", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+      query {
+        product(id: "${id}"){
+    					attributes {
+                name
+                items {
+                  displayValue
+                  value
+                }
+              }
+        }
+    }`,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => (files = res.data.product));
+  return files;
+}

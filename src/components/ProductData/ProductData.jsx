@@ -62,6 +62,7 @@ class ProductData extends Component {
 
   addToCart = () => {
     let product = {
+      id: this.state.productData.id,
       name: this.state.productData.name,
       brand: this.state.productData.brand,
       prices: this.state.productData.prices,
@@ -165,7 +166,7 @@ class ProductData extends Component {
         </div>
         <div className={style.details}>
           <h2>{data.name}</h2>
-          <h3>{data.brand}</h3>
+          <h3 className={style.brand}>{data.brand}</h3>
           {this.attributesSetup(productAttributes, "Text")}
           {this.attributesSetup(productAttributes, "Swatch")}
           <h3>{this.setCurrency(this.props.currency)}</h3>
