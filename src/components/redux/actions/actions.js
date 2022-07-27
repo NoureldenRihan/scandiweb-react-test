@@ -26,6 +26,15 @@ export const setCartItem = (data) => {
   };
 };
 
+export const setArrangedCart = (data) => {
+  return {
+    type: "SET_ARRANGED_CART",
+    payload: {
+      data: data,
+    },
+  };
+};
+
 export const getCart = () => {
   return {
     type: "GET_CART",

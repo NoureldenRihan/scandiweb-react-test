@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import style from "./CartItem.module.css";
 import CartItemBreaker from "../CartItemBreaker/CartItemBreaker";
 import { connect } from "react-redux";
-import SwatchAttribute from "../SwatchAttribute/SwatchAttribute";
 import ChosenAttribute from "../ChosenAttribute/ChosenAttribute";
 import { getAttributes } from "../queries/queries";
 import ChosenSwatchAttribute from "../ChosenSwatchAttribute/ChosenSwatchAttribute";
@@ -10,6 +9,9 @@ import ChosenSwatchAttribute from "../ChosenSwatchAttribute/ChosenSwatchAttribut
 class CartItem extends Component {
   state = {
     productData: {},
+    currentImg: 1,
+    index: 0,
+    uniqueID: Math.random(),
   };
 
   getData = async () => {
@@ -56,19 +58,111 @@ class CartItem extends Component {
     }
   };
 
+  moveImg = (direction) => {
+    let max = this.props.data.gallery.length;
+    let img = document.getElementById(`mainProductImg${this.state.uniqueID}`);
+    if (direction === "right") {
+      if (this.state.currentImg === max) {
+        img.src = this.props.data.gallery[0];
+        this.setState({
+          index: 0,
+          currentImg: 1,
+        });
+      } else {
+        img.src = this.props.data.gallery[this.state.index + 1];
+        this.setState({
+          index: this.state.index + 1,
+          currentImg: this.state.currentImg + 1,
+        });
+      }
+    } else if (direction === "left") {
+      if (this.state.currentImg === 1) {
+        img.src = this.props.data.gallery[max - 1];
+        this.setState({
+          index: max - 1,
+          currentImg: max,
+        });
+      } else {
+        img.src = this.props.data.gallery[this.state.index - 1];
+        this.setState({
+          index: this.state.index - 1,
+          currentImg: this.state.currentImg - 1,
+        });
+      }
+    }
+  };
+
   render() {
     return (
-      <div className={style.cartItem}>
+      <React.Fragment>
         <CartItemBreaker />
-        <div className={style.itemData}>
-          <h3>{this.props.data.name}</h3>
-          <h3 className={style.brand}>{this.props.data.brand}</h3>
-          <h3>{this.setCurrency(this.props.currency)}</h3>
-          {this.attributesSetup(this.props.data.attributes, "Text")}
-          {this.attributesSetup(this.props.data.swatchAttributes, "Swatch")}
+        <div className={style.cartItem}>
+          <div className={style.itemData}>
+            <h3>{this.props.data.name}</h3>
+            <h3 className={style.brand}>{this.props.data.brand}</h3>
+            <h3>{this.setCurrency(this.props.currency)}</h3>
+            {this.attributesSetup(this.props.data.attributes, "Text")}
+            {this.attributesSetup(this.props.data.swatchAttributes, "Swatch")}
+          </div>
+          <div className={style.itemEdit}>
+            <div className={style.quantity}>
+              <div className={style.icon}>
+                <img
+                  src={window.location.origin + "/Images & Icons/plus.png"}
+                  alt="Increase Quantity"
+                />
+              </div>
+              <h3>{this.props.quantity}</h3>
+              <div className={style.icon}>
+                <img
+                  src={window.location.origin + "/Images & Icons/minus.png"}
+                  alt="Decrease Quantity"
+                />
+              </div>
+            </div>
+            <div className={style.gallery}>
+              <div className={style.mainImgHolder}>
+                <img
+                  id={`mainProductImg${this.state.uniqueID}`}
+                  className={style.mainImg}
+                  src={this.props.data.gallery[0]}
+                  alt="Product"
+                />
+                {this.props.data.gallery.length > 1 ? (
+                  <div className={style.galleryNav}>
+                    <div
+                      className={style.left}
+                      onClick={() => this.moveImg("left")}
+                    >
+                      <img
+                        src={
+                          window.location.origin +
+                          "/Images & Icons/leftcaret.png"
+                        }
+                        alt="Navigate Left"
+                      />
+                    </div>
+                    <div
+                      className={style.right}
+                      onClick={() => this.moveImg("right")}
+                    >
+                      <img
+                        src={
+                          window.location.origin +
+                          "/Images & Icons/rightcaret.png"
+                        }
+                        alt="Navigate Right"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={style.itemEdit}></div>
-      </div>
+      </React.Fragment>
     );
   }
 }

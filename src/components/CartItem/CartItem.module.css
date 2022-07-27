@@ -1,12 +1,91 @@
 .cartItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .itemData {
+  display: block;
 }
 
 .itemEdit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .brand {
   font-weight: 400;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.icon:hover {
+  outline: 1px solid black;
+}
+
+.gallery {
+  position: relative;
+}
+
+.mainImgHolder {
+  width: 200px;
+}
+
+.mainImg {
+  width: 100%;
+}
+
+.galleryNav {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.right {
+  margin-left: 10px;
+}
+
+.right,
+.left {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.right:hover,
+.left:hover {
+  background-color: rgba(0, 0, 0, 0.75);
 }

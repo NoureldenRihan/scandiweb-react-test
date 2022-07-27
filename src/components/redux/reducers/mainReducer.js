@@ -25,6 +25,11 @@ const mainReducer = (state = initialState, action) => {
         cart: [...state.cart, action.payload.data],
         quantity: state.quantity + 1,
       };
+    case "SET_ARRANGED_CART":
+      return {
+        ...state,
+        arrangedCart: action.payload.data,
+      };
     case "GET_CART":
       return state.cart;
     default:

@@ -26,6 +26,8 @@ class NavActions extends Component {
     const chosenLabel = e.target.dataset.label;
 
     this.props.setNewCurrency(chosenSymbol, chosenLabel);
+    document.getElementById("optionsModel").style.display = "none";
+    document.getElementById("optionsModel").classList.add("hidden");
   };
 
   getData = async () => {
