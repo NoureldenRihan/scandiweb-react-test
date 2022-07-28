@@ -51,6 +51,7 @@ export async function getProductsData() {
     	      products{
               id
               name
+              brand
               inStock
               prices {
                 currency {
@@ -126,6 +127,27 @@ export async function getAttributes(id) {
                   displayValue
                   value
                 }
+              }
+        }
+    }`,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => (files = res.data.product));
+  return files;
+}
+
+export async function checkAttributes(id) {
+  let files = {};
+  await fetch("http://localhost:4000", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+      query {
+        product(id: "${id}"){
+    					attributes {
+                id
               }
         }
     }`,

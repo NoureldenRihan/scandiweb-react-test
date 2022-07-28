@@ -3,9 +3,12 @@ import style from "./Product.module.css";
 import { connect } from "react-redux";
 import AddToCart from "../AddToCart/AddToCart";
 import Heart from "../Heart/Heart";
+import { checkAttributes } from "../queries/queries";
 
 class Product extends Component {
-  state = {};
+  state = {
+    data: [],
+  };
 
   setCurrency = (currency) => {
     let chosenCurrency = "";
@@ -18,6 +21,17 @@ class Product extends Component {
     }
   };
 
+  getData = async () => {
+    let temp = await checkAttributes(this.props.data.id);
+    this.setState({
+      data: temp,
+    });
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
     return (
       <div className={style.product}>
@@ -29,7 +43,11 @@ class Product extends Component {
           />
           {this.props.data.inStock ? (
             <React.Fragment>
-              <AddToCart id={this.props.data.id} />
+              <AddToCart
+                productData={this.props.data}
+                data={this.state.data}
+                id={this.props.data.id}
+              />
               <Heart />
             </React.Fragment>
           ) : (

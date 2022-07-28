@@ -1,5 +1,9 @@
-.logo {
-  text-align: center;
+.logoHolder {
   width: 100%;
+  text-align: center;
+}
+
+.logo {
+  width: fit-content;
   cursor: pointer;
 }

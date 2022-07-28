@@ -12,12 +12,17 @@ class NavActions extends Component {
 
   showCurrencyModel = () => {
     let model = document.getElementById("optionsModel");
+    let overlay = document.getElementById("optionsOverlay");
     if (model.classList.contains("hidden")) {
       model.style.display = "block";
       model.classList.remove("hidden");
+      overlay.style.display = "block";
+      overlay.classList.remove("hidden");
     } else {
       model.style.display = "none";
       model.classList.add("hidden");
+      overlay.style.display = "none";
+      overlay.classList.add("hidden");
     }
   };
 
@@ -28,6 +33,8 @@ class NavActions extends Component {
     this.props.setNewCurrency(chosenSymbol, chosenLabel);
     document.getElementById("optionsModel").style.display = "none";
     document.getElementById("optionsModel").classList.add("hidden");
+    document.getElementById("optionsOverlay").style.display = "none";
+    document.getElementById("optionsOverlay").classList.add("hidden");
   };
 
   getData = async () => {
@@ -55,6 +62,11 @@ class NavActions extends Component {
             src={window.location.origin + "/Images & Icons/arrow.png"}
             alt="Choose Currency Caret"
           />
+          <div
+            id="optionsOverlay"
+            className={`${style.currencyOverlay} hidden`}
+            onClick={this.showCurrencyModel}
+          ></div>
           <div id="optionsModel" className={`${style.currencyOptions} hidden`}>
             <ul>
               {this.state.currencies.map((item) => (
