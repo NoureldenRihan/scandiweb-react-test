@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import ChosenAttribute from "../ChosenAttribute/ChosenAttribute";
 import { getAttributes } from "../queries/queries";
 import ChosenSwatchAttribute from "../ChosenSwatchAttribute/ChosenSwatchAttribute";
+import { setCartItem, update } from "../redux/actions/actions";
 
 class CartItem extends Component {
   state = {
@@ -92,6 +93,10 @@ class CartItem extends Component {
     }
   };
 
+  alterQuantity = (alteration) => {
+    this.props.alter(alteration, this.props.data);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -106,14 +111,20 @@ class CartItem extends Component {
           </div>
           <div className={style.itemEdit}>
             <div className={style.quantity}>
-              <div className={style.icon}>
+              <div
+                className={style.icon}
+                onClick={() => this.alterQuantity("add")}
+              >
                 <img
                   src={window.location.origin + "/Images & Icons/plus.png"}
                   alt="Increase Quantity"
                 />
               </div>
               <h3>{this.props.quantity}</h3>
-              <div className={style.icon}>
+              <div
+                className={style.icon}
+                onClick={() => this.alterQuantity("remove")}
+              >
                 <img
                   src={window.location.origin + "/Images & Icons/minus.png"}
                   alt="Decrease Quantity"
@@ -178,4 +189,10 @@ const mapStateToProps = (state) => {
   return { currency, currencySymbol };
 };
 
-export default connect(mapStateToProps)(CartItem);
+const mapDispacthToProps = (dispatch) => {
+  const addToCart = (product) => dispatch(setCartItem(product));
+
+  return { addToCart };
+};
+
+export default connect(mapStateToProps, mapDispacthToProps)(CartItem);

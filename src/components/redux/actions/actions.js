@@ -26,6 +26,15 @@ export const setCartItem = (data) => {
   };
 };
 
+export const removeCartItem = (data) => {
+  return {
+    type: "REMOVE_CART_ITEM",
+    payload: {
+      data: data,
+    },
+  };
+};
+
 export const setArrangedCart = (data) => {
   return {
     type: "SET_ARRANGED_CART",
@@ -38,5 +47,11 @@ export const setArrangedCart = (data) => {
 export const getCart = () => {
   return {
     type: "GET_CART",
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: "CLEAR_CART",
   };
 };

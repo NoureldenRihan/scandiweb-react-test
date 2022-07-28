@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import style from "./Cart.module.css";
 import CartItem from "../CartItem/CartItem";
 import CartItemBreaker from "../CartItemBreaker/CartItemBreaker";
-import { setArrangedCart } from "../redux/actions/actions";
+import {
+  setArrangedCart,
+  setCartItem,
+  removeCartItem,
+  clearCart,
+} from "../redux/actions/actions";
 class Cart extends Component {
   state = {
     cartArrangedData: [],
@@ -14,6 +19,10 @@ class Cart extends Component {
     let data = this.props.cartData;
     let added = false;
     if (data.length === 0) {
+      this.setState({
+        cartArrangedData: filteredData,
+      });
+      this.props.arrangeCart(filteredData);
       return;
     }
     data.forEach((item) => {
@@ -58,10 +67,55 @@ class Cart extends Component {
     this.props.arrangeCart(filteredData);
   };
 
-  orderCart = () => {};
+  alterQuantity = (alteration, itemData) => {
+    let data = itemData;
+    this.state.cartArrangedData.forEach((item) => {
+      if (data.name === item.data.name) {
+        if (
+          JSON.stringify(data.attributes) ===
+          JSON.stringify(item.data.attributes)
+        ) {
+          if (
+            JSON.stringify(data.swatchAttributes) ===
+            JSON.stringify(item.data.swatchAttributes)
+          ) {
+            if (alteration === "add") {
+              this.props.addToCart(data);
+            } else if (alteration === "remove") {
+              if (item.quantity > 0) {
+                this.props.removeFromCart(data);
+              }
+            }
+          }
+        }
+      }
+    });
+  };
+
+  getTotal = () => {
+    let total = 0;
+    let pricesArray = [];
+    this.state.cartArrangedData.forEach((item) => {
+      item.data.prices.forEach((price) => {
+        if (price.currency.label === this.props.currency) {
+          pricesArray.push(price.amount * item.quantity);
+        }
+      });
+    });
+    pricesArray.forEach((item) => {
+      total += item;
+    });
+    return `${this.props.currencySymbol}${total.toFixed(2)}`;
+  };
 
   componentDidMount() {
-    this.setupCartItems();
+    this.setupCartItems(this.props.cartData);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartData !== this.props.cartData) {
+      this.setupCartItems(this.props.cartData);
+    }
   }
 
   render() {
@@ -74,13 +128,16 @@ class Cart extends Component {
             quantity={item.quantity}
             productID={item.data.id}
             data={item.data}
+            alter={(alteration, itemData) =>
+              this.alterQuantity(alteration, itemData)
+            }
           />
         ))}
         <div className={style.Checkout}>
           <CartItemBreaker />
           <h3>Quantity: {this.props.quantity}</h3>
-          <h3>Total: </h3>
-          <button className={style.order} onClick={this.orderCart}>
+          <h3>Total: {this.getTotal()}</h3>
+          <button className={style.order} onClick={() => this.props.clear()}>
             Order
           </button>
         </div>
@@ -96,14 +153,18 @@ const mapStateToProps = (state) => {
 
   const cartData = data.cart;
   const quantity = data.quantity;
-
-  return { cartData, quantity };
+  const currency = data.currencyLabel;
+  const currencySymbol = data.currencySymbol;
+  return { cartData, quantity, currency, currencySymbol };
 };
 
 const mapDispatchToProps = (dispatch) => {
   const arrangeCart = (data) => dispatch(setArrangedCart(data));
+  const addToCart = (product) => dispatch(setCartItem(product));
+  const removeFromCart = (product) => dispatch(removeCartItem(product));
+  const clear = () => dispatch(clearCart());
 
-  return { arrangeCart };
+  return { arrangeCart, addToCart, removeFromCart, clear };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -5,4 +5,18 @@
 }
 
 .order {
+  max-width: 100px;
+  width: 100%;
+  background-color: #5ece7b;
+  color: white;
+  padding: 10px 20px;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 15px 0;
+}
+
+.order:hover {
+  background-color: #48a761;
 }
