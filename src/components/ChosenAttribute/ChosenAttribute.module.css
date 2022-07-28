@@ -1,7 +1,19 @@
+.attributeContainer {
+  font-size: 10px;
+}
+
+.attributeContainer .attributeHolder h3 {
+  margin: 2px 3px 2px 0;
+  padding: 5px 8px;
+}
+
 .attributeHolder {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  color: black;
+  text-align: center;
 }
 
 .attributeHolder h3 {
@@ -9,10 +21,6 @@
   border: 2px solid black;
   padding: 10px 12px;
   transition: 0.3s;
-}
-
-.attributeHolder {
-  color: black;
 }
 
 .selected {

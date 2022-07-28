@@ -6,7 +6,11 @@ class ChosenAttribute extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        className={
+          this.props.type === "overlay" ? style.attributeContainer : ""
+        }
+      >
         {this.props.data.attributes !== undefined
           ? this.props.data.attributes.map((item) => {
               if (item.name === this.props.chosen.name) {

@@ -77,3 +77,47 @@
   top: -12px;
   right: -12px;
 }
+
+.actions .cartArea {
+  position: relative;
+}
+
+.actions .overlayCartHolder {
+  position: relative;
+}
+
+.actions .overlay1 {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: -2000px;
+  width: 2000vw;
+  height: 2000vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -2;
+}
+
+.actions .overlay2 {
+  display: none;
+  position: absolute;
+  top: -2000px;
+  left: -2000px;
+  width: 2000vw;
+  height: 2000vh;
+  background-color: transparent;
+  z-index: 4;
+}
+
+.actions .overlayCart {
+  display: none;
+  padding: 0 20px 5px 20px;
+  position: absolute;
+  top: 40px;
+  left: -200px;
+  max-height: 70vh;
+  width: 250px;
+  overflow: auto;
+  background-color: white;
+  z-index: 5;
+  text-align: left;
+}

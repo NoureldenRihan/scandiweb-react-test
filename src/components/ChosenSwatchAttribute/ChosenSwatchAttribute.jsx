@@ -5,7 +5,11 @@ class ChosenSwatchAttribute extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div
+        className={
+          this.props.type === "overlay" ? style.swatchAttributeContainer : ""
+        }
+      >
         {this.props.data.attributes !== undefined
           ? this.props.data.attributes.map((item) => {
               if (item.name === this.props.chosen.name) {

@@ -4,6 +4,7 @@ import { getCurrencies } from "../queries/queries";
 import { connect } from "react-redux";
 import { setCurrency } from "../redux/actions/actions";
 import { Link } from "react-router-dom";
+import OverlayCart from "../OverlayCart/OverlayCart";
 
 class NavActions extends Component {
   state = {
@@ -35,6 +36,18 @@ class NavActions extends Component {
     document.getElementById("optionsModel").classList.add("hidden");
     document.getElementById("optionsOverlay").style.display = "none";
     document.getElementById("optionsOverlay").classList.add("hidden");
+  };
+
+  cart = (state) => {
+    if (state === "open") {
+      document.querySelectorAll(".overlayItem").forEach((item) => {
+        item.style.display = "block";
+      });
+    } else if (state === "close") {
+      document.querySelectorAll(".overlayItem").forEach((item) => {
+        item.style.display = "none";
+      });
+    }
   };
 
   getData = async () => {
@@ -83,9 +96,13 @@ class NavActions extends Component {
             </ul>
           </div>
         </div>
-        <Link to="/cart">
+        <div className={style.cartArea}>
           {this.props.quantity === 0 ? (
-            <div className={style.cartIcon} data-quantity={this.props.quantity}>
+            <div
+              className={style.cartIcon}
+              data-quantity={this.props.quantity}
+              onClick={() => this.cart("open")}
+            >
               <img
                 src={window.location.origin + "/Images & Icons/cart.png"}
                 alt="Cart Icon"
@@ -95,6 +112,7 @@ class NavActions extends Component {
             <div
               className={`${style.cartIcon} ${style.fullCart}`}
               data-quantity={this.props.quantity}
+              onClick={() => this.cart("open")}
             >
               <img
                 src={window.location.origin + "/Images & Icons/cart.png"}
@@ -102,7 +120,16 @@ class NavActions extends Component {
               />
             </div>
           )}
-        </Link>
+          <div className={style.overlayCartHolder}></div>
+          <div className={`${style.overlayCart} overlayItem`}>
+            <OverlayCart />
+          </div>
+          <div className={`${style.overlay1} overlayItem`}></div>
+          <div
+            className={`${style.overlay2} overlayItem`}
+            onClick={() => this.cart("close")}
+          ></div>
+        </div>
       </div>
     );
   }

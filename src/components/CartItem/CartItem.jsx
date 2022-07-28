@@ -13,6 +13,7 @@ class CartItem extends Component {
     currentImg: 1,
     index: 0,
     uniqueID: Math.random(),
+    galleryLength: 0,
   };
 
   getData = async () => {
@@ -45,6 +46,7 @@ class CartItem extends Component {
             key={Math.random()}
             data={this.state.productData}
             chosen={item}
+            type={this.props.type}
           />
         ));
       } else if (type === "Swatch") {
@@ -53,6 +55,7 @@ class CartItem extends Component {
             key={Math.random()}
             data={this.state.productData}
             chosen={item}
+            type={this.props.type}
           />
         ));
       }
@@ -101,7 +104,13 @@ class CartItem extends Component {
     return (
       <React.Fragment>
         <CartItemBreaker />
-        <div className={style.cartItem}>
+        <div
+          className={
+            this.props.type !== "overlay"
+              ? `${style.cartItem}`
+              : `${style.cartItem} ${style.overlayed}`
+          }
+        >
           <div className={style.itemData}>
             <h3>{this.props.data.name}</h3>
             <h3 className={style.brand}>{this.props.data.brand}</h3>
@@ -112,7 +121,11 @@ class CartItem extends Component {
           <div className={style.itemEdit}>
             <div className={style.quantity}>
               <div
-                className={style.icon}
+                className={
+                  this.props.type !== "overlay"
+                    ? `${style.icon}`
+                    : `${style.icon} ${style.overlayedIcon}`
+                }
                 onClick={() => this.alterQuantity("add")}
               >
                 <img
@@ -122,7 +135,11 @@ class CartItem extends Component {
               </div>
               <h3>{this.props.quantity}</h3>
               <div
-                className={style.icon}
+                className={
+                  this.props.type !== "overlay"
+                    ? `${style.icon}`
+                    : `${style.icon} ${style.overlayedIcon}`
+                }
                 onClick={() => this.alterQuantity("remove")}
               >
                 <img
@@ -132,14 +149,21 @@ class CartItem extends Component {
               </div>
             </div>
             <div className={style.gallery}>
-              <div className={style.mainImgHolder}>
+              <div
+                className={
+                  this.props.type !== "overlay"
+                    ? `${style.mainImgHolder}`
+                    : `${style.mainImgHolder} ${style.overlayedImg}`
+                }
+              >
                 <img
                   id={`mainProductImg${this.state.uniqueID}`}
                   className={style.mainImg}
                   src={this.props.data.gallery[0]}
                   alt="Product"
                 />
-                {this.props.data.gallery.length > 1 ? (
+                {this.props.data.gallery.length > 1 &&
+                this.props.type !== "overlay" ? (
                   <div className={style.galleryNav}>
                     <div
                       className={style.left}

@@ -9,6 +9,7 @@ import {
   removeCartItem,
   clearCart,
 } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
 class Cart extends Component {
   state = {
     cartArrangedData: [],
@@ -121,10 +122,15 @@ class Cart extends Component {
   render() {
     return (
       <div className={style.cartHolder}>
-        <h1>Cart</h1>
+        {this.props.type === "overlay" ? (
+          <h3>My Bag, {this.props.quantity} items</h3>
+        ) : (
+          <h1>Cart</h1>
+        )}
         {this.state.cartArrangedData.map((item) => (
           <CartItem
             key={Math.random()}
+            type={this.props.type}
             quantity={item.quantity}
             productID={item.data.id}
             data={item.data}
@@ -135,11 +141,36 @@ class Cart extends Component {
         ))}
         <div className={style.Checkout}>
           <CartItemBreaker />
-          <h3>Quantity: {this.props.quantity}</h3>
-          <h3>Total: {this.getTotal()}</h3>
-          <button className={style.order} onClick={() => this.props.clear()}>
-            Order
-          </button>
+          {this.props.type !== "overlay" ? (
+            <h3>Quantity: {this.props.quantity}</h3>
+          ) : (
+            ""
+          )}
+          {this.props.type !== "overlay" ? (
+            <h3>Total: {this.getTotal()}</h3>
+          ) : (
+            <div className={style.overlayTotal}>
+              <h3>Total: </h3>
+              <h3>{this.getTotal()}</h3>
+            </div>
+          )}
+          {this.props.type !== "overlay" ? (
+            <button className={style.order} onClick={() => this.props.clear()}>
+              Order
+            </button>
+          ) : (
+            <div className={style.cartActions}>
+              <Link to="/cart">
+                <button className={style.viewBag}>View Bag</button>
+              </Link>
+              <button
+                className={style.order1}
+                onClick={() => this.props.clear()}
+              >
+                Check out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
