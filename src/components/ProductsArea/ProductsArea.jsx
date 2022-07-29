@@ -28,7 +28,7 @@ class ProductsArea extends Component {
           if (item.category === "tech") {
             return <Product key={item.id} data={item} />;
           }
-          return "Error";
+          return "";
         });
       case "clothes":
       case "Clothes":
@@ -36,7 +36,7 @@ class ProductsArea extends Component {
           if (item.category === "clothes") {
             return <Product key={item.id} data={item} />;
           }
-          return "Error";
+          return "";
         });
       default:
         return this.state.all.map((item) => (
