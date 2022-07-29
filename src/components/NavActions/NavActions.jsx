@@ -120,7 +120,6 @@ class NavActions extends Component {
               />
             </div>
           )}
-          <div className={style.overlayCartHolder}></div>
           <div className={`${style.overlayCart} overlayItem`}>
             <OverlayCart />
           </div>

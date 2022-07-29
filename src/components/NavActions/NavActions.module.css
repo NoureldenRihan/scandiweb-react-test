@@ -82,10 +82,6 @@
   position: relative;
 }
 
-.actions .overlayCartHolder {
-  position: relative;
-}
-
 .actions .overlay1 {
   display: none;
   position: absolute;
