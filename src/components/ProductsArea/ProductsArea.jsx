@@ -28,14 +28,18 @@ class ProductsArea extends Component {
     switch (category) {
       case "tech":
       case "Tech":
-        return this.state.tech.map((item) => (
-          <Product key={item.id} data={item} />
-        ));
+        return this.state.all.map((item) => {
+          if (item.category === "tech") {
+            return <Product key={item.id} data={item} />;
+          }
+        });
       case "clothes":
       case "Clothes":
-        return this.state.clothes.map((item) => (
-          <Product key={item.id} data={item} />
-        ));
+        return this.state.all.map((item) => {
+          if (item.category === "clothes") {
+            return <Product key={item.id} data={item} />;
+          }
+        });
       default:
         return this.state.all.map((item) => (
           <Product key={item.id} data={item} />
