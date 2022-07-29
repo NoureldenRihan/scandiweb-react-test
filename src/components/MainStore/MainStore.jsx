@@ -32,8 +32,4 @@ const mapStateToProps = (state) => {
   return { category };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainStore);
+export default connect(mapStateToProps)(MainStore);

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import ChosenAttribute from "../ChosenAttribute/ChosenAttribute";
 import { getAttributes } from "../queries/queries";
 import ChosenSwatchAttribute from "../ChosenSwatchAttribute/ChosenSwatchAttribute";
-import { setCartItem, update } from "../redux/actions/actions";
+import { setCartItem } from "../redux/actions/actions";
 
 class CartItem extends Component {
   state = {

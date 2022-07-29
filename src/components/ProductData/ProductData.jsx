@@ -61,12 +61,13 @@ class ProductData extends Component {
   };
 
   addToCart = () => {
+    let data = this.state.productData;
     let product = {
-      id: this.state.productData.id,
-      name: this.state.productData.name,
-      brand: this.state.productData.brand,
-      prices: this.state.productData.prices,
-      gallery: this.state.productData.gallery,
+      id: data.id,
+      name: data.name,
+      brand: data.brand,
+      prices: data.prices,
+      gallery: data.gallery,
       attributes: [],
       swatchAttributes: [],
     };

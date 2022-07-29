@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import style from "./OverlayCart.module.css";
 import Cart from "../Cart/Cart";
 
 class OverlayCart extends Component {

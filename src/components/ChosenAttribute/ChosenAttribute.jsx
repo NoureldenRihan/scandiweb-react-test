@@ -40,6 +40,7 @@ class ChosenAttribute extends Component {
                   </React.Fragment>
                 );
               }
+              return "";
             })
           : ""}
       </div>

@@ -7,16 +7,12 @@ import { connect } from "react-redux";
 class ProductsArea extends Component {
   state = {
     all: [],
-    clothes: [],
-    tech: [],
   };
 
   getData = async () => {
     let temp = await getProductsData(this.props.category);
     this.setState({
       all: temp.products,
-      clothes: this.state.all.filter((item) => item.category === "clothes"),
-      tech: this.state.all.filter((item) => item.category === "tech"),
     });
   };
 
@@ -32,6 +28,7 @@ class ProductsArea extends Component {
           if (item.category === "tech") {
             return <Product key={item.id} data={item} />;
           }
+          return "Error";
         });
       case "clothes":
       case "Clothes":
@@ -39,6 +36,7 @@ class ProductsArea extends Component {
           if (item.category === "clothes") {
             return <Product key={item.id} data={item} />;
           }
+          return "Error";
         });
       default:
         return this.state.all.map((item) => (

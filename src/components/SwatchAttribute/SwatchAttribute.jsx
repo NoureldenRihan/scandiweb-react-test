@@ -29,7 +29,7 @@ class SwatchAttribute extends Component {
                   onClick={this.select}
                 ></div>
               ))
-            : "1"}
+            : ""}
         </div>
       </div>
     );

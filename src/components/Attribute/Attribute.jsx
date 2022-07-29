@@ -31,7 +31,7 @@ class Attribute extends Component {
                   {item.value}
                 </h3>
               ))
-            : "1"}
+            : ""}
         </div>
       </div>
     );

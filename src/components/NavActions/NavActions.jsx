@@ -3,7 +3,6 @@ import style from "./NavActions.module.css";
 import { getCurrencies } from "../queries/queries";
 import { connect } from "react-redux";
 import { setCurrency } from "../redux/actions/actions";
-import { Link } from "react-router-dom";
 import OverlayCart from "../OverlayCart/OverlayCart";
 
 class NavActions extends Component {
