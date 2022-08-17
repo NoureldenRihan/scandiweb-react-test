@@ -42,6 +42,10 @@ class NavFilters extends Component {
   }
 
   chooseCategory = (e) => {
+    if (this.props.status === "deny") {
+      return;
+    }
+
     document.querySelectorAll(".option").forEach((item) => {
       item.classList.remove(`${style.active}`);
     });

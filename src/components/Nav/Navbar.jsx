@@ -10,7 +10,7 @@ class Navbar extends Component {
     return (
       <div className={style.navHolder}>
         <nav className={style.nav}>
-          <NavFilters />
+          <NavFilters status={this.props.filterStatus} />
           <Logo />
           <NavActions />
         </nav>

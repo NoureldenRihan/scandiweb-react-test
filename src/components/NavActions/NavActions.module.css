@@ -16,6 +16,7 @@
   margin-left: 10px;
   position: relative;
   z-index: 3;
+  cursor: pointer;
 }
 
 .actions .currencyOverlay {
@@ -31,7 +32,7 @@
 
 .actions .currencyChanger .currencyOptions {
   position: absolute;
-  top: 25px;
+  top: 50px;
   left: -25px;
   background-color: white;
   box-shadow: 1px 1px 10px rgb(198, 198, 198);
@@ -56,6 +57,10 @@
 
 .actions .currencyChanger .currencyOptions ul li:hover {
   background-color: #eeeeee;
+}
+
+.actions .options {
+  margin-left: 8px;
 }
 
 .actions .cartIcon {

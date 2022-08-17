@@ -125,9 +125,13 @@ class ProductData extends Component {
   checkStock = () => {
     if (this.state.productData.inStock !== undefined) {
       if (this.state.productData.inStock !== true) {
-        return <Navigate to="/" />;
+        return <button className={style.cartAddNoStock}>Out of Stock</button>;
       } else {
-        return;
+        return (
+          <button className={style.cartAdd} onClick={this.setCart}>
+            Add to Cart
+          </button>
+        );
       }
     }
   };
@@ -140,7 +144,6 @@ class ProductData extends Component {
 
     return (
       <div className={style.productArea}>
-        {this.checkStock()}
         <div className={style.imgs}>
           {data.gallery !== undefined
             ? data.gallery.map((item) => (
@@ -174,9 +177,7 @@ class ProductData extends Component {
           <p className={style.proceedToCart} id="proceedToCart">
             Please Choose from the available options
           </p>
-          <button className={style.cartAdd} onClick={this.setCart}>
-            Add to Cart
-          </button>
+          {this.checkStock()}
           {parsedDescription}
         </div>
       </div>

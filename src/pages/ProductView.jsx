@@ -7,7 +7,7 @@ class ProductView extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <Navbar filterStatus="deny" />
         <ProductData />
       </React.Fragment>
     );

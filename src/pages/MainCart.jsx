@@ -7,7 +7,7 @@ class MainCart extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <Navbar filterStatus="deny" />
         <Cart />
       </React.Fragment>
     );

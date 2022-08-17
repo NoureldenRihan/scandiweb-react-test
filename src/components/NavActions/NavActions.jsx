@@ -15,14 +15,14 @@ class NavActions extends Component {
     let overlay = document.getElementById("optionsOverlay");
     if (model.classList.contains("hidden")) {
       model.style.display = "block";
-      model.classList.remove("hidden");
+      model.classList.toggle("hidden");
       overlay.style.display = "block";
-      overlay.classList.remove("hidden");
+      overlay.classList.toggle("hidden");
     } else {
       model.style.display = "none";
-      model.classList.add("hidden");
+      model.classList.toggle("hidden");
       overlay.style.display = "none";
-      overlay.classList.add("hidden");
+      overlay.classList.toggle("hidden");
     }
   };
 
@@ -31,10 +31,6 @@ class NavActions extends Component {
     const chosenLabel = e.target.dataset.label;
 
     this.props.setNewCurrency(chosenSymbol, chosenLabel);
-    document.getElementById("optionsModel").style.display = "none";
-    document.getElementById("optionsModel").classList.add("hidden");
-    document.getElementById("optionsOverlay").style.display = "none";
-    document.getElementById("optionsOverlay").classList.add("hidden");
   };
 
   cart = (state) => {
@@ -63,36 +59,39 @@ class NavActions extends Component {
   render() {
     return (
       <div className={style.actions}>
-        <div className="currencyArea">
-          <h3 id="currency" className="currency">
-            {this.props.currencySymbol}
-          </h3>
-        </div>
-        <div className={style.currencyChanger}>
-          <img
-            onClick={this.showCurrencyModel}
-            src={window.location.origin + "/Images & Icons/arrow.png"}
-            alt="Choose Currency Caret"
-          />
-          <div
-            id="optionsOverlay"
-            className={`${style.currencyOverlay} hidden`}
-            onClick={this.showCurrencyModel}
-          ></div>
-          <div id="optionsModel" className={`${style.currencyOptions} hidden`}>
-            <ul>
-              {this.state.currencies.map((item) => (
-                <li
-                  key={item.symbol}
-                  id={item.symbol}
-                  data-label={item.label}
-                  data-symbol={item.symbol}
-                  onClick={this.setCurrencyData}
-                >
-                  {`${item.symbol} ${item.label}`}
-                </li>
-              ))}
-            </ul>
+        <div className={style.currencyChanger} onClick={this.showCurrencyModel}>
+          <div className="currencyArea">
+            <h3 id="currency" className="currency">
+              {this.props.currencySymbol}
+            </h3>
+          </div>
+          <div className={style.options}>
+            <img
+              src={window.location.origin + "/Images & Icons/arrow.png"}
+              alt="Choose Currency Caret"
+            />
+            <div
+              id="optionsOverlay"
+              className={`${style.currencyOverlay} hidden`}
+            ></div>
+            <div
+              id="optionsModel"
+              className={`${style.currencyOptions} hidden`}
+            >
+              <ul>
+                {this.state.currencies.map((item) => (
+                  <li
+                    key={item.symbol}
+                    id={item.symbol}
+                    data-label={item.label}
+                    data-symbol={item.symbol}
+                    onClick={this.setCurrencyData}
+                  >
+                    {`${item.symbol} ${item.label}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <div className={style.cartArea}>
