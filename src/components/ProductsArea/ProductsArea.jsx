@@ -10,7 +10,7 @@ class ProductsArea extends Component {
   };
 
   getData = async () => {
-    let temp = await getProductsData(this.props.category);
+    let temp = await getProductsData();
     this.setState({
       all: temp.products,
     });

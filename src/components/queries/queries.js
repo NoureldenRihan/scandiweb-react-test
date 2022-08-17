@@ -61,6 +61,9 @@ export async function getProductsData() {
                 }
               gallery
               category
+              attributes {
+                id
+              }
       }
   }
     }`,

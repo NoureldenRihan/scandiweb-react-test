@@ -22,10 +22,10 @@ class AddToCart extends Component {
   };
 
   render() {
-    if (this.props.data.attributes !== undefined) {
+    if (this.props.attributeNum !== undefined) {
       return (
         <React.Fragment>
-          {this.props.data.attributes.length !== 0 ? (
+          {this.props.attributeNum > 0 ? (
             <div className={style.addToCart}>
               <img
                 src={window.location.origin + "/Images & Icons/whiteCart.png"}

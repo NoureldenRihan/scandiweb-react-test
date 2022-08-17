@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import style from "./Product.module.css";
 import { connect } from "react-redux";
 import AddToCart from "../AddToCart/AddToCart";
-import Heart from "../Heart/Heart";
-import { checkAttributes } from "../queries/queries";
 import { Link } from "react-router-dom";
 
 class Product extends Component {
   state = {
-    data: [],
     urlPath: `/product/${this.props.data.id}`,
   };
 
@@ -23,17 +20,6 @@ class Product extends Component {
     }
   };
 
-  getData = async () => {
-    let temp = await checkAttributes(this.props.data.id);
-    this.setState({
-      data: temp,
-    });
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -45,9 +31,12 @@ class Product extends Component {
                 src={this.props.data.gallery[0]}
                 alt={this.props.data.name}
               />
-              {this.props.data.inStock ? <Heart /> : ""}
               <div className={style.addIcon}>
-                <AddToCart data={this.state.data} />
+                {this.props.data.attributes !== undefined ? (
+                  <AddToCart attributeNum={this.props.data.attributes.length} />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <h3 className={style.productName}>{this.props.data.name}</h3>

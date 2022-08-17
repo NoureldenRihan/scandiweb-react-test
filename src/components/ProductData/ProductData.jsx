@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import Attribute from "../Attribute/Attribute";
 import SwatchAttribute from "../SwatchAttribute/SwatchAttribute";
 import { setCartItem } from "../redux/actions/actions";
-import { Navigate } from "react-router-dom";
 
 class ProductData extends Component {
   state = {
