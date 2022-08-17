@@ -7,7 +7,7 @@ class AddToCart extends Component {
   state = {};
 
   setCart = () => {
-    let data = this.props.productData;
+    let data = this.props.data;
     let product = {
       id: data.id,
       name: data.name,
@@ -19,6 +19,11 @@ class AddToCart extends Component {
     };
 
     this.props.addToCart(product);
+  };
+
+  disobeyLink = (e) => {
+    e.preventDefault();
+    this.setCart();
   };
 
   render() {
@@ -33,10 +38,10 @@ class AddToCart extends Component {
               />
             </div>
           ) : (
-            <div className={style.addToCart} onClick={this.setCart}>
+            <div className={style.addToCart} onClick={this.disobeyLink}>
               <img
                 src={window.location.origin + "/Images & Icons/whiteCart.png"}
-                alt="Add To Cart"
+                alt="Add To Carts"
               />
             </div>
           )}

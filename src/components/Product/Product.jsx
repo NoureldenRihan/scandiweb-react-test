@@ -33,7 +33,10 @@ class Product extends Component {
               />
               <div className={style.addIcon}>
                 {this.props.data.attributes !== undefined ? (
-                  <AddToCart attributeNum={this.props.data.attributes.length} />
+                  <AddToCart
+                    data={this.props.data}
+                    attributeNum={this.props.data.attributes.length}
+                  />
                 ) : (
                   ""
                 )}
