@@ -1,8 +1,8 @@
 .cartItem {
-  display: flex;
+  display: flex !important;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
 }
 
@@ -18,10 +18,11 @@
 }
 
 .itemEdit {
-  display: flex;
+  display: flex !important;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  padding: 10px 10px 0 0;
   width: 60%;
 }
 

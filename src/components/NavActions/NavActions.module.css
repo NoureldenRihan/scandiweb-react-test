@@ -114,9 +114,9 @@
   padding: 0 20px 5px 20px;
   position: absolute;
   top: 40px;
-  left: -200px;
+  left: -250px;
   max-height: 70vh;
-  width: 250px;
+  width: 300px;
   overflow: auto;
   background-color: white;
   z-index: 5;
