@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import ChosenAttribute from "../ChosenAttribute/ChosenAttribute";
 import { getAttributes } from "../queries/queries";
 import ChosenSwatchAttribute from "../ChosenSwatchAttribute/ChosenSwatchAttribute";
-import { setCartItem } from "../redux/actions/actions";
+import { setCartItem, removeCartItem } from "../redux/actions/actions";
 
 class CartItem extends Component {
   state = {
@@ -97,7 +97,11 @@ class CartItem extends Component {
   };
 
   alterQuantity = (alteration) => {
-    this.props.alter(alteration, this.props.data);
+    if (alteration === "add") {
+      this.props.addToCart(this.props.data);
+    } else if (alteration === "remove") {
+      this.props.removeFromCart(this.props.data);
+    }
   };
 
   render() {
@@ -126,7 +130,7 @@ class CartItem extends Component {
                     ? `${style.icon}`
                     : `${style.icon} ${style.overlayedIcon}`
                 }
-                onClick={() => this.alterQuantity("add")}
+                onClick={(e) => this.alterQuantity(e, "add")}
               >
                 <img
                   src={window.location.origin + "/Images & Icons/plus.png"}
@@ -140,7 +144,7 @@ class CartItem extends Component {
                     ? `${style.icon}`
                     : `${style.icon} ${style.overlayedIcon}`
                 }
-                onClick={() => this.alterQuantity("remove")}
+                onClick={(e) => this.alterQuantity(e, "remove")}
               >
                 <img
                   src={window.location.origin + "/Images & Icons/minus.png"}
@@ -215,8 +219,9 @@ const mapStateToProps = (state) => {
 
 const mapDispacthToProps = (dispatch) => {
   const addToCart = (product) => dispatch(setCartItem(product));
+  const removeFromCart = (product) => dispatch(removeCartItem(product));
 
-  return { addToCart };
+  return { addToCart, removeFromCart };
 };
 
 export default connect(mapStateToProps, mapDispacthToProps)(CartItem);

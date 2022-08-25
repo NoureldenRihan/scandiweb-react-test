@@ -6,13 +6,14 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "./components/redux/reducers/allReducers";
 
-const store = createStore(allReducers);
+const store = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

@@ -68,31 +68,6 @@ class Cart extends Component {
     this.props.arrangeCart(filteredData);
   };
 
-  alterQuantity = (alteration, itemData) => {
-    let data = itemData;
-    this.state.cartArrangedData.forEach((item) => {
-      if (data.name === item.data.name) {
-        if (
-          JSON.stringify(data.attributes) ===
-          JSON.stringify(item.data.attributes)
-        ) {
-          if (
-            JSON.stringify(data.swatchAttributes) ===
-            JSON.stringify(item.data.swatchAttributes)
-          ) {
-            if (alteration === "add") {
-              this.props.addToCart(data);
-            } else if (alteration === "remove") {
-              if (item.quantity > 0) {
-                this.props.removeFromCart(data);
-              }
-            }
-          }
-        }
-      }
-    });
-  };
-
   getTotal = () => {
     let total = 0;
     let pricesArray = [];
@@ -134,9 +109,6 @@ class Cart extends Component {
             quantity={item.quantity}
             productID={item.data.id}
             data={item.data}
-            alter={(alteration, itemData) =>
-              this.alterQuantity(alteration, itemData)
-            }
           />
         ))}
         <div className={style.Checkout}>
